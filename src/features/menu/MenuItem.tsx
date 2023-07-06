@@ -4,7 +4,7 @@ type MentuItemProps = {
   pizza: PizzaItem;
 };
 
-type PizzaItem = {
+export type PizzaItem = {
   id: string;
   name: string;
   unitPrice: number;
