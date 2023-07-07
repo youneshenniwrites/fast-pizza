@@ -1,7 +1,4 @@
-type getAddressProps = {
-  latitude: number;
-  longitude: number;
-};
+import { getAddress as getAddressProps } from "../types";
 
 export async function getAddress({ latitude, longitude }: getAddressProps) {
   const res = await fetch(

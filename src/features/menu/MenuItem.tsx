@@ -1,17 +1,5 @@
+import { MentuItem as MentuItemProps } from "../../types";
 import { formatCurrency } from "../../utils/helpers";
-
-type MentuItemProps = {
-  pizza: PizzaItem;
-};
-
-export type PizzaItem = {
-  id: string;
-  name: string;
-  unitPrice: number;
-  ingredients: string[];
-  soldOut: boolean;
-  imageUrl: string;
-};
 
 function MenuItem({ pizza }: MentuItemProps) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;

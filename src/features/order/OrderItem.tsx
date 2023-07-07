@@ -1,16 +1,5 @@
 import { formatCurrency } from "../../utils/helpers";
-
-type OrderItemProps = {
-  item: ItemProps;
-  isLoadingIngredients: boolean;
-  ingredients: string[];
-};
-
-type ItemProps = {
-  quantity: number;
-  name: string;
-  totalPrice: number;
-};
+import { OrderItem as OrderItemProps } from "../../types";
 
 function OrderItem({
   item,

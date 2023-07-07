@@ -5,9 +5,10 @@ import {
   formatCurrency,
   formatDate,
 } from "../../utils/helpers";
+import { Order as OrderType } from "../../types";
 
 function Order() {
-  const order: any = useLoaderData();
+  const order: OrderType = useLoaderData() as OrderType;
 
   const {
     // id,
