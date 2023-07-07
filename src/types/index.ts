@@ -2,7 +2,7 @@ export type MentuItem = {
   pizza: PizzaItem;
 };
 
-export type PizzaItem = {
+type PizzaItem = {
   id: string;
   name: string;
   unitPrice: number;
@@ -35,11 +35,9 @@ export type Order = {
 
 export type OrderItem = {
   item: Item;
-  isLoadingIngredients: boolean;
-  ingredients: string[];
 };
 
-export type Item = {
+type Item = {
   quantity: number;
   name: string;
   totalPrice: number;
@@ -51,8 +49,9 @@ export type getAddress = {
 };
 
 export type CartItem = {
-  pizzaId: string;
+  pizzaId: number;
   name: string;
   quantity: number;
+  unitPrice: number;
   totalPrice: number;
 };
