@@ -2,7 +2,7 @@ export type MentuItem = {
   pizza: PizzaItem;
 };
 
-type PizzaItem = {
+export type PizzaItem = {
   id: string;
   name: string;
   unitPrice: number;
@@ -11,7 +11,7 @@ type PizzaItem = {
   imageUrl: string;
 };
 
-export type Pizza = {
+export type CartItem = {
   pizzaId: number;
   name: string;
   quantity: number;
@@ -27,7 +27,7 @@ export type Order = {
   address: string;
   priority: boolean;
   estimatedDelivery: string;
-  cart: Pizza[];
+  cart: CartItem[];
   position: string;
   orderPrice: number;
   priorityPrice: number;
@@ -46,12 +46,4 @@ type Item = {
 export type getAddress = {
   latitude: number;
   longitude: number;
-};
-
-export type CartItem = {
-  pizzaId: number;
-  name: string;
-  quantity: number;
-  unitPrice: number;
-  totalPrice: number;
 };

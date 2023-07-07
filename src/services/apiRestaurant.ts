@@ -1,3 +1,5 @@
+import { Order } from "../types";
+
 export async function getMenu() {
   const res = await fetch(`${import.meta.env.VITE_BASE_ORDER_URL}/menu`);
 
@@ -16,7 +18,7 @@ export async function getOrder(id: string) {
   return data;
 }
 
-export async function createOrder(newOrder: object) {
+export async function createOrder(newOrder: Partial<Order>): Promise<Order> {
   try {
     const res = await fetch(`${import.meta.env.VITE_BASE_ORDER_URL}/order`, {
       method: "POST",
