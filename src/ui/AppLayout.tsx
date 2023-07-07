@@ -5,6 +5,7 @@ import Loader from "./Loader";
 
 export default function AppLayout() {
   const navigation = useNavigation();
+  // * This navigation state is app universal
   const isLoading = navigation.state === "loading";
 
   return (
