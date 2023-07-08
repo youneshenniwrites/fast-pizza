@@ -1,5 +1,11 @@
 import { To } from "react-router-dom";
 
+type Item = {
+  name: string;
+  quantity: number;
+  totalPrice: number;
+};
+
 export type MentuItem = {
   pizza: PizzaItem;
 };
@@ -15,11 +21,8 @@ export type PizzaItem = {
 
 export type CartItem = {
   pizzaId: number;
-  name: string;
-  quantity: number;
   unitPrice: number;
-  totalPrice: number;
-};
+} & Item;
 
 export type Order = {
   id: string;
@@ -35,19 +38,15 @@ export type Order = {
   priorityPrice: number;
 };
 
-export type OrderItem = {
-  item: Item;
-};
-
-type Item = {
-  quantity: number;
-  name: string;
-  totalPrice: number;
-};
-
 export type getAddress = {
   latitude: number;
   longitude: number;
+};
+
+export type OrderItemProps = {
+  item: Item;
+  isLoadingIngredients?: boolean;
+  ingredients?: string[];
 };
 
 export type ButtonProps = {
