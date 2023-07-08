@@ -1,3 +1,5 @@
+import { To } from "react-router-dom";
+
 export type MentuItem = {
   pizza: PizzaItem;
 };
@@ -46,4 +48,16 @@ type Item = {
 export type getAddress = {
   latitude: number;
   longitude: number;
+};
+
+export type ButtonProps = {
+  children: React.ReactNode;
+  type: "primary" | "small" | "secondary";
+  disabled?: boolean;
+  to?: To;
+};
+
+export type LinkButtonProps = {
+  children: React.ReactNode;
+  to: To;
 };

@@ -1,9 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-
-type LinkButtonProps = {
-  children: React.ReactNode;
-  to: string;
-};
+import { LinkButtonProps } from "../types";
 
 export default function LinkButton({ children, to }: LinkButtonProps) {
   const navigate = useNavigate();
