@@ -9,6 +9,7 @@ import {
 import { createOrder } from "../../services/apiRestaurant";
 import { isValidPhone } from "../../utils/helpers";
 import Button from "../../ui/Button";
+import { useAppSelector } from "../../store/hooks";
 
 const fakeCart: CartItem[] = [
   {
@@ -35,6 +36,7 @@ const fakeCart: CartItem[] = [
 ];
 
 function CreateOrder() {
+  const username = useAppSelector((state) => state.user.username);
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
@@ -49,7 +51,13 @@ function CreateOrder() {
       <Form method="POST">
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
-          <input className="input grow" type="text" name="customer" required />
+          <input
+            className="input grow"
+            type="text"
+            name="customer"
+            defaultValue={username}
+            required
+          />
         </div>
 
         <div className="mb-5 flex flex-col gap-2 sm:flex-row sm:items-center">
