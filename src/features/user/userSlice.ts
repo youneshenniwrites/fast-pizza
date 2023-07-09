@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { RootState } from "../../store/store";
 // import { getAddress } from "../../services/apiGeocoding";
 
 // function getPosition(): Promise<GeolocationPosition> {
@@ -44,3 +45,5 @@ const userSlice = createSlice({
 export const { updateName } = userSlice.actions;
 
 export default userSlice.reducer;
+
+export const getUsername = (state: RootState) => state.user.username;

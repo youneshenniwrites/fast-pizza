@@ -2,6 +2,8 @@ import CartItem from "./CartItem";
 import Button from "../../ui/Button";
 import LinkButton from "../../ui/LinkButton";
 import { useAppSelector } from "../../store/hooks";
+import { getCartItems } from "./cartSlice";
+import { getUsername } from "../user/userSlice";
 
 const fakeCart = [
   {
@@ -28,9 +30,8 @@ const fakeCart = [
 ];
 
 function Cart() {
-  const username = useAppSelector((state) => state.user.username);
-
-  const cart = fakeCart;
+  const username = useAppSelector(getUsername);
+  const cart = useAppSelector(getCartItems);
 
   return (
     <div className="px-4 py-3">

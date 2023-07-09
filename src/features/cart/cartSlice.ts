@@ -56,6 +56,8 @@ export const {
 
 export default cartSlice.reducer;
 
+export const getCartItems = (state: RootState) => state.cart.cart;
+
 export const getTotalCartQuantity = (state: RootState) =>
   state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -67,9 +69,9 @@ export const getTotalCartPrice = (state: RootState) =>
   * RTK recommends this approach for large applications. *
   * https://github.com/reduxjs/reselect *
   
-const selectCartItems = (state: RootState) => state.cart.cart;
+const getCartItems = (state: RootState) => state.cart.cart;
 
-const getTotalCartQuantity = createSelector(selectCartItems, (cartItems) =>
+const getTotalCartQuantity = createSelector(getCartItems, (cartItems) =>
   cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
 );
 */
