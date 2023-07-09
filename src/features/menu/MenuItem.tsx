@@ -1,13 +1,17 @@
 import { formatCurrency } from "../../utils/helpers";
 import { CartItem, MentuItem as MentuItemProps } from "../../types";
 import Button from "../../ui/Button";
-import { useAppDispatch } from "../../store/hooks";
-import { addItem } from "../cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { addItem, getCartItemQuantity } from "../cart/cartSlice";
+import DeleteItem from "../cart/DeleteItem";
 
 function MenuItem({ pizza }: MentuItemProps) {
+  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+
   const dispatch = useAppDispatch();
 
-  const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const cartItemQuantity = useAppSelector(getCartItemQuantity(id));
+  const isInCart = cartItemQuantity > 0;
 
   function handleAddToCart() {
     const newItem: CartItem = {
@@ -41,7 +45,9 @@ function MenuItem({ pizza }: MentuItemProps) {
             </p>
           )}
 
-          {!soldOut && (
+          {isInCart && <DeleteItem pizzaId={id} />}
+
+          {!soldOut && !isInCart && (
             <Button type="small" onClick={handleAddToCart}>
               Add to cart
             </Button>
