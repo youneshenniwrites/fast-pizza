@@ -1,4 +1,3 @@
-import { CartItem, Order } from "../../types";
 import {
   ActionFunctionArgs,
   Form,
@@ -7,42 +6,28 @@ import {
   useNavigation,
 } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
-import { isValidPhone } from "../../utils/helpers";
+import { formatCurrency, isValidPhone } from "../../utils/helpers";
 import Button from "../../ui/Button";
 import { useAppSelector } from "../../store/hooks";
-
-const fakeCart: CartItem[] = [
-  {
-    pizzaId: 12,
-    name: "Mediterranean",
-    quantity: 2,
-    unitPrice: 16,
-    totalPrice: 32,
-  },
-  {
-    pizzaId: 6,
-    name: "Vegetale",
-    quantity: 1,
-    unitPrice: 13,
-    totalPrice: 13,
-  },
-  {
-    pizzaId: 11,
-    name: "Spinach and Mushroom",
-    quantity: 1,
-    unitPrice: 15,
-    totalPrice: 15,
-  },
-];
+import { getCartItems, getCartTotalPrice } from "../cart/cartSlice";
+import { getUsername } from "../user/userSlice";
+import EmptyCart from "../cart/EmptyCart";
+import { Order } from "../../types";
 
 function CreateOrder() {
-  const username = useAppSelector((state) => state.user.username);
+  const username = useAppSelector(getUsername);
+  const cart = useAppSelector(getCartItems);
+
+  const priorityPrice = 0;
+  const cartTotalPrice = useAppSelector(getCartTotalPrice);
+  const totalPrice = cartTotalPrice + priorityPrice;
+
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
 
   const formErrors: any = useActionData();
 
-  const cart = fakeCart;
+  if (cart.length === 0) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
@@ -99,7 +84,9 @@ function CreateOrder() {
         <div>
           <input type="hidden" name="cart" value={JSON.stringify(cart)} />
           <Button type="primary" disabled={isSubmitting}>
-            {isSubmitting ? "Placing order..." : "Order now"}
+            {isSubmitting
+              ? "Placing order..."
+              : `Order now for ${formatCurrency(totalPrice)}`}
           </Button>
         </div>
       </Form>
