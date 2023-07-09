@@ -1,7 +1,7 @@
 export function formatCurrency(value: number | bigint) {
   return new Intl.NumberFormat("en", {
     style: "currency",
-    currency: "EUR",
+    currency: "GBP",
   }).format(value);
 }
 

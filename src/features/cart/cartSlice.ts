@@ -1,20 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../../types";
+import { RootState } from "../../store/store";
 
 type CartState = {
   cart: CartItem[];
 };
 
 const initialState: CartState = {
-  cart: [
-    {
-      pizzaId: 12,
-      name: "Napolitan",
-      quantity: 3,
-      unitPrice: 16,
-      totalPrice: 48,
-    },
-  ],
+  cart: [],
 };
 
 const cartSlice = createSlice({
@@ -62,3 +55,21 @@ export const {
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
+
+export const getTotalCartQuantity = (state: RootState) =>
+  state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+
+export const getTotalCartPrice = (state: RootState) =>
+  state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+/* 
+  * This is a memoised version of the getTotalCartQuantity selector. *
+  * RTK recommends this approach for large applications. *
+  * https://github.com/reduxjs/reselect *
+  
+const selectCartItems = (state: RootState) => state.cart.cart;
+
+const getTotalCartQuantity = createSelector(selectCartItems, (cartItems) =>
+  cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
+);
+*/
