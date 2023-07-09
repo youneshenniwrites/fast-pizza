@@ -4,6 +4,7 @@ import Button from "../../ui/Button";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { addItem, getCartItemQuantity } from "../cart/cartSlice";
 import DeleteItem from "../cart/DeleteItem";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 function MenuItem({ pizza }: MentuItemProps) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
@@ -45,7 +46,15 @@ function MenuItem({ pizza }: MentuItemProps) {
             </p>
           )}
 
-          {isInCart && <DeleteItem pizzaId={id} />}
+          {isInCart && (
+            <div className="flex items-center gap-3 sm:gap-8">
+              <UpdateItemQuantity
+                pizzaId={id}
+                cartItemQuantity={cartItemQuantity}
+              />
+              <DeleteItem pizzaId={id} />
+            </div>
+          )}
 
           {!soldOut && !isInCart && (
             <Button type="small" onClick={handleAddToCart}>

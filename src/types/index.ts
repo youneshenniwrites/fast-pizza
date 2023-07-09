@@ -51,7 +51,7 @@ export type OrderItemProps = {
 
 export type ButtonProps = {
   children: React.ReactNode;
-  type: "primary" | "small" | "secondary";
+  type: "primary" | "small" | "secondary" | "round";
   disabled?: boolean;
   to?: To;
   onClick?: () => void;
