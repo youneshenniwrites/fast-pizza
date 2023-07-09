@@ -3,7 +3,7 @@ import { getAddress as getAddressProps } from "../types";
 export async function getAddress({ latitude, longitude }: getAddressProps) {
   const res = await fetch(
     `${
-      import.meta.env.VITE_BASE_URL
+      import.meta.env.VITE_BASE_LOCATION_URL
     }?latitude=${latitude}&longitude=${longitude}`
   );
   if (!res.ok) throw Error("Failed getting address");
