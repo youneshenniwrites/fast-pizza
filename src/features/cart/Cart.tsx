@@ -2,12 +2,17 @@ import CartItem from "./CartItem";
 import Button from "../../ui/Button";
 import LinkButton from "../../ui/LinkButton";
 import { useAppSelector } from "../../store/hooks";
-import { getCartItems } from "./cartSlice";
+import { clearCart, getCartItems } from "./cartSlice";
 import { getUsername } from "../user/userSlice";
+import { useDispatch } from "react-redux";
+import EmptyCart from "./EmptyCart";
 
 function Cart() {
   const username = useAppSelector(getUsername);
   const cart = useAppSelector(getCartItems);
+  const disptach = useDispatch();
+
+  if (cart.length === 0) return <EmptyCart />;
 
   return (
     <div className="px-4 py-3">
@@ -26,7 +31,9 @@ function Cart() {
           Order pizzas
         </Button>
 
-        <Button type="secondary">Clear cart</Button>
+        <Button type="secondary" onClick={() => disptach(clearCart())}>
+          Clear cart
+        </Button>
       </div>
     </div>
   );
