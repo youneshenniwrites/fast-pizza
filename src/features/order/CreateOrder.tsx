@@ -13,13 +13,16 @@ import { getCartItems, getCartTotalPrice } from "../cart/cartSlice";
 import { getUsername } from "../user/userSlice";
 import EmptyCart from "../cart/EmptyCart";
 import { Order } from "../../types";
+import { useState } from "react";
 
 function CreateOrder() {
   const username = useAppSelector(getUsername);
   const cart = useAppSelector(getCartItems);
 
-  const priorityPrice = 0;
+  const [withPriority, setWithPriority] = useState(false);
+
   const cartTotalPrice = useAppSelector(getCartTotalPrice);
+  const priorityPrice = withPriority ? cartTotalPrice * 0.2 : 0;
   const totalPrice = cartTotalPrice + priorityPrice;
 
   const navigation = useNavigation();
@@ -75,6 +78,8 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
+            value={String(withPriority)}
+            onChange={(e) => setWithPriority(e.target.checked)}
           />
           <label className="font-medium" htmlFor="priority">
             Want to yo give your order priority?
@@ -101,7 +106,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const order: Partial<Order> = {
     ...data,
     cart: JSON.parse(data.cart as string),
-    priority: data.priority === "on",
+    priority: data.priority === "true",
   };
 
   const errors: any = {};
