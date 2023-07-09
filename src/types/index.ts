@@ -11,7 +11,7 @@ export type MentuItem = {
 };
 
 export type PizzaItem = {
-  id: string;
+  id: number;
   name: string;
   unitPrice: number;
   ingredients: string[];
@@ -25,7 +25,7 @@ export type CartItem = {
 } & Item;
 
 export type Order = {
-  id: string;
+  id: number;
   status: string;
   customer: string;
   phone: string;
@@ -54,6 +54,7 @@ export type ButtonProps = {
   type: "primary" | "small" | "secondary";
   disabled?: boolean;
   to?: To;
+  onClick?: () => void;
 };
 
 export type LinkButtonProps = {
