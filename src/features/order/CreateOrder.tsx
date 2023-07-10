@@ -10,10 +10,11 @@ import { createOrder } from "../../services/apiRestaurant";
 import { formatCurrency, isValidPhone } from "../../utils/helpers";
 import Button from "../../ui/Button";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { getCartItems, getCartTotalPrice } from "../cart/cartSlice";
+import { clearCart, getCartItems, getCartTotalPrice } from "../cart/cartSlice";
 import { fetchAddress, getUser } from "../user/userSlice";
 import EmptyCart from "../cart/EmptyCart";
 import { Order, Status } from "../../types";
+import store from "../../store/store";
 
 function CreateOrder() {
   const {
@@ -161,6 +162,9 @@ export async function action({ request }: ActionFunctionArgs) {
   if (Object.keys(errors).length > 0) return errors;
 
   const newOrder = await createOrder(order);
+
+  // ! May cause performance issues. Find alternative ways.
+  store.dispatch(clearCart());
 
   return redirect(`/order/${newOrder.id}`);
 }
