@@ -1,3 +1,4 @@
+import { FormEvent } from "react";
 import { To } from "react-router-dom";
 
 type Item = {
@@ -38,9 +39,9 @@ export type Order = {
   priorityPrice: number;
 };
 
-export type getAddress = {
-  latitude: number;
-  longitude: number;
+export type GeoPosition = {
+  latitude: number | undefined;
+  longitude: number | undefined;
 };
 
 export type OrderItemProps = {
@@ -54,7 +55,7 @@ export type ButtonProps = {
   type: "primary" | "small" | "secondary" | "round";
   disabled?: boolean;
   to?: To;
-  onClick?: () => void;
+  onClick?: (e: FormEvent) => void;
 };
 
 export type LinkButtonProps = {
@@ -62,10 +63,16 @@ export type LinkButtonProps = {
   to: To;
 };
 
+export enum Status {
+  "idle",
+  "loading",
+  "error",
+}
+
 export type UserState = {
   username: string;
-  status: string;
-  position: object;
+  status: Status;
+  position: GeoPosition;
   address: string;
   error: string | undefined;
 };

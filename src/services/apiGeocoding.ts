@@ -1,6 +1,6 @@
-import { getAddress as getAddressProps } from "../types";
+import { GeoPosition } from "../types";
 
-export async function getAddress({ latitude, longitude }: getAddressProps) {
+export async function getAddress({ latitude, longitude }: GeoPosition) {
   const res = await fetch(
     `${
       import.meta.env.VITE_BASE_LOCATION_URL
