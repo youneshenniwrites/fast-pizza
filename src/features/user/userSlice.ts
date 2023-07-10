@@ -1,6 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
 import { getAddress, getPosition } from "../../services/apiGeocoding";
+import { UserState } from "../../types";
 
 export const fetchAddress = createAsyncThunk(
   "user/fatchAdress",
@@ -21,14 +22,6 @@ export const fetchAddress = createAsyncThunk(
     return { position, address };
   }
 );
-
-type UserState = {
-  username: string;
-  status: string;
-  position: object;
-  address: string;
-  error: string | undefined;
-};
 
 const initialState: UserState = {
   username: "",

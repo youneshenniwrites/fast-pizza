@@ -61,3 +61,15 @@ export type LinkButtonProps = {
   children: React.ReactNode;
   to: To;
 };
+
+export type UserState = {
+  username: string;
+  status: string;
+  position: object;
+  address: string;
+  error: string | undefined;
+};
+
+export type CartState = {
+  cart: CartItem[];
+};
