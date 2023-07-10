@@ -12,6 +12,7 @@ import {
 import { Order as OrderType, PizzaItem } from "../../types";
 import OrderItem from "./OrderItem";
 import { useEffect } from "react";
+import UpdateOrder from "./UpdateOrder";
 
 function Order() {
   const order: OrderType = useLoaderData() as OrderType;
@@ -19,6 +20,7 @@ function Order() {
 
   useEffect(
     function () {
+      // * Load data from another route (menu) into this route (order)
       if (!fetcher.data && fetcher.state === "idle") fetcher.load("/menu");
     },
     [fetcher]
@@ -92,6 +94,8 @@ function Order() {
           To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}
         </p>
       </div>
+
+      {!priority && <UpdateOrder />}
     </div>
   );
 }
